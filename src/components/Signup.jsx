@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
+import {httpRequest} from '../lib/https'
+import { useNavigate } from 'react-router-dom'
 
 function Signup() {
+
+    const navigate = useNavigate()
 
     const model = {
         fullname : '',
@@ -20,10 +24,19 @@ function Signup() {
         }))
     }
 
-    const signup = (e)=>{
+    const signup = async(e)=>{
+
+    try{
      e.preventDefault()
-     console.log(form)
-     toast.success("Signup success")
+    const {data} = await httpRequest.post('/signup',form)
+     toast.success(data.message)
+     setForm(model)
+    setTimeout(()=>navigate("/login"),200)
+    }catch(err){
+     toast.error(err?.response?.data?.message || err.message)
+    }    
+
+     
     }
 
   return (
