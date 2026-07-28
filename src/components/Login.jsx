@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import {httpRequest} from '../lib/https'
 import { useNavigate } from 'react-router-dom'
+import { useSession } from '../zustand/useSession'
 
 function Login() {
-
+   
+    const {setUser} = useSession(state=>state)
     const navigate = useNavigate()
 
     const model = {
@@ -31,7 +33,11 @@ function Login() {
     const {data} = await httpRequest.post('/login',form)
      toast.success(data.message)
      setForm(model)
-    setTimeout(()=>navigate("/"),200)
+     setUser({
+        user:data.user,
+        token:data.token
+    })
+    setTimeout(()=>navigate("/app/profile"),200)
     }catch(err){
      toast.error(err?.response?.data?.message || err.message)
     }    
