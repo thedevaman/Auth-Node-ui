@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSession } from '../../zustand/useSession'
+import { useSession } from '../zustand/useSession'
 import { Navigate, Outlet } from 'react-router-dom'
 function AuthGuard() {
 
