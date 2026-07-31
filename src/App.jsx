@@ -7,6 +7,8 @@ import { ToastContainer } from 'react-toastify'
 import Profile from './components/apps/Profile'
 import AuthGuard from './components/AuthGuard'
 import Layout from './components/apps/Layout'
+import Dashboard from './components/apps/Dashboard'
+import Notebook from './components/apps/Notebook'
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
          <Route path="/login" element={<Login/>} />
          <Route element={<AuthGuard/>}>
          <Route element={<Layout/>}>
+         <Route path='/app/dashboard' element={<Dashboard/>} />
+         <Route path='/app/notebook' element={<Notebook/>} />
          <Route path='/app/profile' element={<Profile/>} />
          </Route>
          </Route>

@@ -39,7 +39,7 @@ function Login() {
     })
 
 
-    setTimeout(()=>navigate("/app/profile"),200)
+    setTimeout(()=>navigate("/app/dashboard"),200)
     }catch(err){
      toast.error(err?.response?.data?.message || err.message)
     }    
