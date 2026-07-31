@@ -1,11 +1,18 @@
 import { AlignRight, LogOut } from 'lucide-react'
 import React, { useState } from 'react'
 import { useSession } from '../../zustand/useSession'
+import { Outlet } from 'react-router-dom'
 
 
 function Layout() {
     const [open,setOpen] = useState(false)
     const {user,logout} = useSession(state=>state)
+
+    const handleLogout = () =>{
+      logout()
+      navigate("/login")
+    }
+
   return (
     <div>
       <aside className='bg-blue-600 h-full fixed top-0 left-0 w-[250px]'></aside>
@@ -24,11 +31,13 @@ function Layout() {
             
             
             <div className='flex flex-col items-start gap-1 absolute -bottom-28 shadow-lg right-0 bg-white border border-gray-200 rounded-lg'>
-             <p className='hover:bg-gray-100 w-full text-left py-1 px-4 capitalize'>{user.fullname}</p>
-             <p className='hover:bg-gray-100 w-full text-left py-1 px-4'>{user.email}</p>
+             <p className='hover:bg-gray-100 w-full text-left py-1 px-4 capitalize'>{user.user.fullname}</p>
+             <p className='hover:bg-gray-100 w-full text-left py-1 px-4'>{user.user.email}</p>
              <div className='flex items-center gap-2 hover:bg-gray-100 w-full text-left py-1 px-4'>
+              <button onClick={handleLogout} className='flex items-center gap-2 hover:bg-gray-100 w-full text-lrft py-1 px-4'>
                 <LogOut className='w-4 h-4'/>
                 Logout
+              </button>  
              </div>
             </div>
            }
@@ -37,9 +46,7 @@ function Layout() {
 
         </nav>
         <div className='px-12 py-8'>
-        <h1 className='text-4xl font-bold'>Welcome to profile page</h1>
-        
-        <p className='text-black/60 mt-6'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi reiciendis recusandae eligendi culpa similique qui ex sapiente sequi ullam, voluptas iusto quaerat itaque doloribus. Quas accusantium dolores veritatis aspernatur suscipit?</p>
+         <Outlet/>
         </div>
       </section>
     </div>

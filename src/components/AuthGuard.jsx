@@ -8,7 +8,7 @@ function AuthGuard() {
     if(!user)
        return <Navigate to="/login" />
 
-    return<Outlet/>
+    return <Outlet/>
 }
 
 export default AuthGuard

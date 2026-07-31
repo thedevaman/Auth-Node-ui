@@ -37,6 +37,8 @@ function Login() {
         user:data.user,
         token:data.token
     })
+
+
     setTimeout(()=>navigate("/app/profile"),200)
     }catch(err){
      toast.error(err?.response?.data?.message || err.message)
